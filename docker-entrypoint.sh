@@ -4,7 +4,7 @@ set -e
 
 cuckoo_config_dir="/cuckoo/conf/"
 # If machinery is VirtualBox, apply some tweaks in order to be able to use it from within the container
-if [ grep -iE "^\s*machinery\s*=\s*virtualbox\s*$" "${cuckoo_config_dir}/cuckoo.conf" ]; then
+if [ grep -i -E "^\s*machinery\s*=\s*virtualbox\s*$" "${cuckoo_config_dir}/cuckoo.conf" ]; then
   /virtualbox_tweaks.py
   if [ "$?" -eq 1 ]; then
     echo >&2 "[ERROR] SSH key cannot be found. Please specify one in order to reach VirtualBox at the host."
