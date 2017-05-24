@@ -16,7 +16,8 @@ fi
 /check_required_services.py
 
 # Change the ownership of /cuckoo to cuckoo, but exclude configuration files
-chown -R cuckoo:cuckoo $(ls /cuckoo/ | awk '{if($1 != "conf"){ print $1 }}') /tmp/ && chown cuckoo:cuckoo /cuckoo
+chown cuckoo:cuckoo /cuckoo
+chown -R cuckoo:cuckoo /tmp
 
 # Add cuckoo as command if needed
 if [ "${1:0:1}" = '-' ]; then
