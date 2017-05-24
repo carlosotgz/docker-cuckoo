@@ -4,6 +4,9 @@ set -e
 
 # Wait for required services based on Cuckoo's configuration files
 /check_required_services.py
+if [ "$?" -eq 1 ]; then
+  exit 1
+fi
 
 # Change the ownership of /cuckoo to cuckoo, but exclude configuration files
 chown -R cuckoo:cuckoo $(ls /cuckoo/ | awk '{if($1 != "conf"){ print $1 }}') /tmp/ && chown cuckoo:cuckoo /cuckoo
@@ -37,9 +40,6 @@ if [ "$(id -u)" = '0' ]; then
       ;;
     api )
       set -- su-exec cuckoo /sbin/tini -- cuckoo api --host 0.0.0.0 --port 1337
-      ;;
-    web )
-      set -- su-exec cuckoo /sbin/tini -- cuckoo web runserver 0.0.0.0:31337
       ;;
   esac
 fi

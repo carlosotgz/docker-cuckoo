@@ -34,7 +34,7 @@ def check_service(address, port, name):
         time.sleep(1)
     else:
         print "{0} is not available".format(name)
-        return
+        sys.exit(1)
 
 def check_elasticsearch(address, port, user = None, password = None):
     url = 'http://{0}:{1}/_cat/health'.format(address, port)
@@ -51,7 +51,7 @@ def check_elasticsearch(address, port, user = None, password = None):
             time.sleep(1)
     else:
         print 'Elasticsearch is not available at {0}:{1}'.format(address, port)
-        return
+        sys.exit(1)
 
 cuckoo_cfg = ConfigParser.ConfigParser()
 cuckoo_cfg.read("/cuckoo/conf/cuckoo.conf")
