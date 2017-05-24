@@ -30,6 +30,7 @@ if [ "$(id -u)" = '0' ]; then
           chmod 400 /cuckoo/key
         fi
       fi
+
       cd /cuckoo
       shift
       set -- su-exec cuckoo /sbin/tini -- cuckoo -d "$@"
@@ -37,9 +38,6 @@ if [ "$(id -u)" = '0' ]; then
     submit )
       shift
       set -- su-exec cuckoo /sbin/tini -- cuckoo submit "$@"
-      ;;
-    api )
-      set -- su-exec cuckoo /sbin/tini -- cuckoo api --host 0.0.0.0 --port 1337
       ;;
   esac
 fi
