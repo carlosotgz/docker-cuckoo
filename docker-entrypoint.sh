@@ -2,16 +2,6 @@
 
 set -e
 
-cuckoo_config_dir="/cuckoo/conf/"
-# If machinery is VirtualBox, apply some tweaks in order to be able to use it from within the container
-if [ grep -i -E "^\s*machinery\s*=\s*virtualbox\s*$" "${cuckoo_config_dir}/cuckoo.conf" ]; then
-  /virtualbox_tweaks.py
-  if [ "$?" -eq 1 ]; then
-    echo >&2 "[ERROR] SSH key cannot be found. Please specify one in order to reach VirtualBox at the host."
-    exit 1
-  fi
-fi
-
 # Wait for required services based on Cuckoo's configuration files
 /check_required_services.py
 
@@ -28,6 +18,17 @@ fi
 if [ "$(id -u)" = '0' ]; then
   case "$1" in
     daemon )
+      cuckoo_config_dir="/cuckoo/conf/"
+      # If machinery is VirtualBox, apply some tweaks in order to be able to use it from within the container
+      if [ -n "$(grep -i -E "^\s*machinery\s*=\s*virtualbox\s*$" "${cuckoo_config_dir}/cuckoo.conf")" ]; then
+        /virtualbox_tweaks.py
+        if [ "$?" -eq 1 ]; then
+          echo >&2 "[ERROR] SSH key cannot be found. Please specify one in order to reach VirtualBox at the host."
+          exit 1
+        else
+          chmod 400 /cuckoo/key
+        fi
+      fi
       cd /cuckoo
       shift
       set -- su-exec cuckoo /sbin/tini -- cuckoo -d "$@"
