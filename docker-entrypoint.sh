@@ -21,9 +21,8 @@ fi
 if [ "$(id -u)" = '0' ]; then
   case "$1" in
     daemon )
-      cuckoo_config_dir="/cuckoo/conf/"
       # If machinery is VirtualBox, apply some tweaks in order to be able to use it from within the container
-      if [ -n "$(grep -i -E "^\s*machinery\s*=\s*virtualbox\s*$" "${cuckoo_config_dir}/cuckoo.conf")" ]; then
+      if [ -n "$(grep -i -E "^\s*machinery\s*=\s*virtualbox\s*$" "/cuckoo/conf/cuckoo.conf")" ]; then
         /virtualbox_tweaks.py
         if [ "$?" -eq 0 ]; then
           chown cuckoo:cuckoo /cuckoo/key
