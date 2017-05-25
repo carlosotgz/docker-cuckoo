@@ -28,8 +28,8 @@ RUN apk add --no-cache -t .build-deps \
                            py-pip \
                            git \
                            linux-headers \
-                           libcap
-RUN set -x \
+                           libcap \
+  && set -x \
   && setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump \
   && echo "===> Install ssdeep..." \
   && wget -O /tmp/$SSDEEP.tar.gz https://downloads.sourceforge.net/project/ssdeep/$SSDEEP/$SSDEEP.tar.gz \
