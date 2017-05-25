@@ -21,15 +21,6 @@ fi
 if [ "$(id -u)" = '0' ]; then
   case "$1" in
     daemon )
-      # If machinery is VirtualBox, apply some tweaks in order to be able to use it from within the container
-      if [ -n "$(grep -i -E "^\s*machinery\s*=\s*virtualbox\s*$" "/cuckoo/conf/cuckoo.conf")" ]; then
-        /virtualbox_tweaks.py
-        if [ "$?" -eq 0 ]; then
-          chown cuckoo:cuckoo /cuckoo/key
-          chmod 400 /cuckoo/key
-        fi
-      fi
-
       cd /cuckoo
       shift
       set -- su-exec cuckoo /sbin/tini -- cuckoo -d "$@"

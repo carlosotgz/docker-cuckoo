@@ -9,7 +9,6 @@ ENV SSDEEP ssdeep-2.13
 # Install Cuckoo Sandbox Required Dependencies
 COPY requirements.txt /tmp/requirements.txt
 RUN apk add --no-cache tcpdump py-lxml py-chardet py-libvirt py-crypto curl libpq
-RUN apk add --no-cache openssh-client
 RUN apk add --no-cache -t .build-deps \
                            postgresql-dev \
                            libxslt-dev \
@@ -63,10 +62,6 @@ RUN apk add --no-cache -t .build-deps \
 
 COPY check_required_services.py /check_required_services.py
 COPY docker-entrypoint.sh /entrypoint.sh
-
-# Wrapper and tweaks for VirtualBox outside of the container
-COPY wrapper.sh /wrapper.sh
-COPY virtualbox_tweaks.py /virtualbox_tweaks.py
 
 WORKDIR /cuckoo
 
