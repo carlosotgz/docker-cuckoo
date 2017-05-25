@@ -12,6 +12,7 @@ RUN apk add --no-cache tcpdump py-lxml py-chardet py-libvirt py-crypto curl
 RUN apk add --no-cache openssh-client
 RUN apk add --no-cache -t .build-deps \
                            postgresql-dev \
+                           libpq \
                            libxslt-dev \
                            libxml2-dev \
                            python-dev \
