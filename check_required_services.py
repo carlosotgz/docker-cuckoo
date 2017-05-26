@@ -69,7 +69,6 @@ def check_postgres(address, port, db, user, password):
             conn.close()
             return
         except Exception as e:
-            print e
             time.sleep(1)
     else:
         print 'Postgres is not available.'
