@@ -1,6 +1,6 @@
 FROM blacktop/volatility:2.6
 
-LABEL maintainer "Carlos Ortigoza Dempster"
+LABEL maintainer "Carlos Ortigoza Dempster <carlos.otgz@gmail.com>"
 
 ENV CUCKOO_VERSION 2.0.2
 ENV CUCKOO_CWD /cuckoo
