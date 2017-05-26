@@ -18,6 +18,7 @@ class REMatcher(object):
 
     def group(self,i):
         return self.rematch.group(i)
+
 """
 Knock a TCP port once per second, 20 seconds at most.
 """
