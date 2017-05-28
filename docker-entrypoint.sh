@@ -26,7 +26,7 @@ if [ "$(id -u)" = '0' ]; then
       set -- su-exec cuckoo /sbin/tini -- cuckoo -d "$@"
       ;;
     rooter )
-      set -- cuckoo rooter /tmp/cuckoo-rooter --service /etc/init.d/openvpn
+      set -- /sbin/tini -- cuckoo rooter /tmp/cuckoo-rooter --service /etc/init.d/openvpn
       ;;
   esac
 fi
