@@ -2,7 +2,7 @@ FROM blacktop/volatility:2.6
 
 LABEL maintainer "Carlos Ortigoza Dempster <carlos.otgz@gmail.com>"
 
-ENV CUCKOO_VERSION 2.0.2
+ENV CUCKOO_VERSION 2.0.4a1
 ENV CUCKOO_CWD /cuckoo
 ENV SSDEEP ssdeep-2.13
 
