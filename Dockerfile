@@ -8,7 +8,7 @@ ENV SSDEEP ssdeep-2.13
 
 # Install Cuckoo Sandbox Required Dependencies
 COPY requirements.txt /tmp/requirements.txt
-RUN apk add --no-cache tcpdump py-lxml py-chardet py-libvirt py-crypto curl libpq openvpn
+RUN apk add --no-cache tcpdump py-lxml py-chardet py-libvirt py-crypto curl swig libpq openvpn
 RUN apk add --no-cache -t .build-deps \
                            postgresql-dev \
                            libxslt-dev \
